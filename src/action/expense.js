@@ -21,4 +21,7 @@ export const destroy = (expense) => ({
   payload: expense,
 })
 
-
+export const drag = (payload) => ({
+  type: 'EXPENSE_DRAG',
+  payload
+})

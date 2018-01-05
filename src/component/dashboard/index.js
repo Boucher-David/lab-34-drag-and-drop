@@ -15,8 +15,18 @@ class Dashboard extends React.Component{
     console.log('__EXPENSES__', this.props.expenses);
   };
 
-  componentWillMount(){
+  drop = (event) => {
+    
+    event.preventDefault();
+    let expenseID = event.dataTransfer.getData('expenseID');
+    let oldCategoryID = event.dataTransfer.getData('oldCategoryID');
+    this.props.expenseDrag({expenseID: expenseID, newCategoryID: event.target.id, oldCategoryID: oldCategoryID});
+
   }
+  allowDrop = (event) => {
+    event.preventDefault();
+  }
+
  
   render(){
     return(
@@ -25,7 +35,7 @@ class Dashboard extends React.Component{
         <CategoryForm id='main-form' onComplete={this.props.categoryCreate}/>
         <div className='category-wrapper'>
           {this.props.categories.map((category,i) =>
-            <div key={category.id}> 
+            <div key={category.id} id={category.id} onDrop={this.drop} onDragOver={this.allowDrop}> 
               <CategoryItem 
                 category={category} 
                 categoryRemove={this.props.categoryRemove}
@@ -59,6 +69,7 @@ let mapDispatchToProps = (dispatch) => {
     categoryRemove: (data) => dispatch(category.destroy(data)),
     expenseCreate: (data) => dispatch(expense.create(data)),
     expenseDelete: (data) => dispatch(expense.destroy(data)),
+    expenseDrag: (data) => dispatch(expense.drag(data))
   }
 }
 
