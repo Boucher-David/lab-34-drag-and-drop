@@ -1,6 +1,9 @@
 401 JS --  Lab 34 Budget Tracker
 ===
 
+David's Notes
+
+===
 Unlike the previous React assignments where you have been shepherding your work through the labs, for this assignment, you have been given a starting point from which to begin.
 
 Assume you have been hired at a company and have been handed this codebase, and need complete the project for delivery.  You must work from the existing code, adopting it's style, layout and architecture while still fulfilling the requirements.
