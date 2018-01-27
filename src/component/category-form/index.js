@@ -21,7 +21,9 @@ class CategoryForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
-    this.props.onComplete(this.state);
+    console.log('props', this.props);
+    (e.target.id === 'createCategory') ? this.props.categoryCreate(this.state) : this.props.categoryUpdate(this.state);
+
     this.setState(emptyState);
   };
 
@@ -32,7 +34,7 @@ class CategoryForm extends React.Component{
   
   render(){
     let button = this.props.category ? 'update category' : 'create category';
-    
+    let buttonID = (button === 'update category') ? 'updateCategory' : 'createCategory';
 
     return(
       <div className='category-form'>
@@ -56,7 +58,7 @@ class CategoryForm extends React.Component{
             onChange={this.handleChange}
           />
   
-          <button type='submit'> {button} </button>
+          <button onClick={this.handleSubmit} id={buttonID}> {button} </button>
         
         </form>
       </div>

@@ -16,7 +16,6 @@ class Dashboard extends React.Component{
   };
 
   drop = (event) => {
-    
     event.preventDefault();
     let expenseID = event.dataTransfer.getData('expenseID');
     let oldCategoryID = event.dataTransfer.getData('oldCategoryID');
@@ -27,28 +26,32 @@ class Dashboard extends React.Component{
     event.preventDefault();
   }
 
+
  
   render(){
     return(
       <div className='dashboard'>
         <h1> budget manager </h1>
-        <CategoryForm id='main-form' onComplete={this.props.categoryCreate}/>
-        <div className='category-wrapper'>
-          {this.props.categories.map((category,i) =>
-            <div key={category.id} id={category.id} onDrop={this.drop} onDragOver={this.allowDrop}> 
-              <CategoryItem 
-                category={category} 
-                categoryRemove={this.props.categoryRemove}
-                categoryUpdate={this.props.categoryUpdate}
-              />
-              <ExpenseForm 
-                onComplete={this.props.expenseCreate} 
-                categoryID={category.id}
-                expenses={this.props.expenses}
-                expenseDelete={this.props.expenseDelete}
-              />
-            </div>
-          )}
+        <CategoryForm id='main-form' categoryCreate={this.props.categoryCreate} />
+        <div id="category-wrapper">
+          {
+            this.props.categories.map((category, i) => {
+              return <div key={category.id} id={category.id} onDrop={this.drop} onDragOver={this.allowDrop} className="categories">
+                <CategoryItem 
+                  category={category} 
+                  categoryRemove={this.props.categoryRemove}
+                  categoryUpdate={this.props.categoryUpdate}
+                  categoryCreate={this.props.categoryCreate}
+                />
+                <ExpenseForm 
+                  expenseCreate={this.props.expenseCreate} 
+                  categoryID={category.id}
+                  expenses={this.props.expenses}
+                  expenseDelete={this.props.expenseDelete}
+                />
+              </div> 
+            })
+            }
         </div>
       </div>
     );

@@ -1,51 +1,25 @@
-const emptyState = {};
 
-export default (state=emptyState, {type, payload}) => {
+
+export default (state=[], action) => {
+  let {type, payload} = action;
 
   switch(type){
-    case 'CATEGORY_CREATE':
-      return {...state, [payload.id]:[]};
     case 'EXPENSE_CREATE':
-      let categoryID = payload.categoryID;
-      let category = state[categoryID];
-      let result = [...category, payload];
-      return {...state, [categoryID]: result};
-    case 'EXPENSE_UPDATE':
-      return state;
+
+      return [...state, {...payload}];
 
     case 'EXPENSE_DRAG':
-      if (payload.categoryID === "") return state;
-
-    let oldState = {...state};
-    let expenseToDrag = {};
-
-    oldState[payload.oldCategoryID].map(expense => {
-      if (expense.id === payload.expenseID) expenseToDrag[expense.id] = expense;
-      if (expense.id === payload.expenseID) expenseToDrag[expense.id].categoryID = payload.newCategoryID;
-    });
-
-    // add expense to other category
+      let newState = [...state];
     
-    oldState[payload.newCategoryID].push({...expenseToDrag[payload.expenseID]});
+      state.map((expense, i) => {
+        if (state[i].id === payload.expenseID) newState[i].categoryID = payload.newCategoryID;
+      });    
 
-    // delete expense from old category
-    oldState[payload.oldCategoryID].filter(expense => expense.categoryID !== payload.oldCategoryID);
-  
-    oldState[payload.oldCategoryID].forEach((i, key) => {
-
-      if (i.categoryID !== payload.oldCategoryID) {
-        oldState[payload.oldCategoryID][key] === null;
-        delete oldState[payload.oldCategoryID][key];
-      }
-    });
-
-      return oldState;
-
+      return newState;
     case 'EXPENSE_DESTROY':
-      categoryID = payload.categoryID;
-      category = state[categoryID];
-      let newState = category.filter(section => section.id != payload.id);
-      return {...state, [categoryID]:newState};
+
+      return state.filter(expense => expense.id !== payload);
+
     default:
       return state;
   }

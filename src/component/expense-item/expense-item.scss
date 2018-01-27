@@ -1,6 +1,13 @@
 @import 'vars';
 
-.expense-item {
+.expense-block {
   display: block;
   clear: both;
+  width: 100%;
+
+}
+
+.expense-item {
+  background-color:lightblue;
+  margin-top: 5px;
 }
