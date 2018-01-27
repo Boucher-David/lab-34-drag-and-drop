@@ -1,13 +1,14 @@
 401 JS --  Lab 34 Budget Tracker
+
 ===
 
 David's Notes
 
-npm run watch to start the front-end server.
+*npm run watch to start the front-end server.
 
 Simply drag the expense (light blue background) over a green background (the category) in order to drag. 
 
-I've done the testing for the new drag and drop feature with state. assuming ashkaan tested the rest beforehand so it should be good.
+I've done the testing for the new drag and drop feature with state. assuming ashkaan tested the rest beforehand so it should be good.*
 
 ===
 Unlike the previous React assignments where you have been shepherding your work through the labs, for this assignment, you have been given a starting point from which to begin.
